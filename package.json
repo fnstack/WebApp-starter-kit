@@ -4,7 +4,7 @@
   "description": "Starter kit for web front-end projects (React, Redux, Typescript).",
   "scripts": {
     "prestart": "babel-node buildScripts/startMessage.js",
-    "start": "npm-run-all --parallel security-check open:src",
+    "start": "npm-run-all --parallel open:src",
     "open:src": "babel-node buildScripts/srcServer.js",
     "lint": "esw webpack.config.* src buildScripts --color",
     "lint:watch": "npm run lint -- --watch",
@@ -24,6 +24,7 @@
   "author": "Hse Dev Team",
   "license": "MIT",
   "dependencies": {
+    "babel-polyfill": "^6.22.0",
     "compression": "^1.6.2",
     "es6-promise": "^4.0.5",
     "history": "^4.5.1",

@@ -17,8 +17,8 @@ export default {
 
   entry: {
     app: [
-      'webpack-hot-middleware/client?reload=true',
-      path.resolve(__dirname, 'src/index.tsx')
+      //'webpack-hot-middleware/client?reload=true',
+      './src/index.tsx'
     ]
   },
   target: 'web',
@@ -30,10 +30,10 @@ export default {
   },
   plugins: [
     // Create HTML file that includes reference to bundled JS.
-    // new HtmlWebpackPlugin({
-    //   template: 'src/index.html',
-    //   inject: true
-    // }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: true
+    }),
     new CheckerPlugin(),
     new webpack.LoaderOptionsPlugin({
       debug: true,

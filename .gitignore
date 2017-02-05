@@ -41,3 +41,4 @@ db.json
 
 # dist folder
 dist
+.awcache/

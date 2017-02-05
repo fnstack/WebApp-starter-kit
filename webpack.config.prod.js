@@ -4,15 +4,15 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-const copySync = (src, dest, overwrite) => {
-  if (overwrite && fs.existsSync(dest)) {
-    fs.unlinkSync(dest);
-  }
-  const data = fs.readFileSync(src);
-  fs.writeFileSync(dest, data);
-}
+// const copySync = (src, dest, overwrite) => {
+//   if (overwrite && fs.existsSync(dest)) {
+//     fs.unlinkSync(dest);
+//   }
+//   const data = fs.readFileSync(src);
+//   fs.writeFileSync(dest, data);
+// }
 
-copySync('./src/favicon.ico', './dist/favicon.ico', true);
+// copySync('./src/favicon.ico', './dist/favicon.ico', true);
 
 export default {
   debug: true,

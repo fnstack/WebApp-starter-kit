@@ -1,6 +1,12 @@
 import * as React from 'react';
 
-class App extends React.Component<any, any> {
+// interface IAppProps extends React.Props<any> {
+//   session: any;
+//   login: () => void;
+//   logout: () => void;
+// };
+
+class App extends React.Component<any, void> {
   public render() {
     return (
         <div>
@@ -10,4 +16,4 @@ class App extends React.Component<any, any> {
   }
 }
 
-export { App }
+export { App };

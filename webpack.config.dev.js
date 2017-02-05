@@ -24,6 +24,7 @@ export default {
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'src'),
+    //path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js',
     pathinfo: true
@@ -59,13 +60,16 @@ export default {
   ],
 
   module: {
-    rules: [{
-        enforce: 'pre',
-        test: /\.tsx?$/,
-        loader: 'tslint-loader'
-      },
+    rules: [
+      // {
+      //   enforce: 'pre',
+      //   test: /\.tsx?$/,
+      //   exclude: /node_modules/,
+      //   loader: 'tslint-loader'
+      // },
       {
         test: /\.tsx?$/,
+        exclude: /node_modules/,
         loader: 'react-hot-loader!awesome-typescript-loader'
       },
       {
@@ -76,18 +80,11 @@ export default {
       {
         test: /\.css$/,
         include: path.resolve('./src'),
+        exclude: /node_modules/,
         loaders: [
           'style-loader',
           'css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]',
           'postcss-loader'
-        ]
-      },
-      {
-        test: /\.css$/,
-        exclude: path.resolve('./src'),
-        loaders: [
-          'style-loader',
-          'css-loader'
         ]
       },
 

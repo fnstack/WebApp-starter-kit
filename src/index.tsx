@@ -1,12 +1,8 @@
-// import * as e6p from 'es6-promise';
-// (e6p as any).polyfill();
-// import 'isomorphic-fetch';
-
 import 'babel-polyfill';
 
-// import * as React from 'react';
-// import * as ReactDOM from 'react-dom';
-// import { App } from 'views';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { App } from './views/containers';
 // import { Provider } from 'react-redux';
 // const { Router, browserHistory } = require('react-router');
 // import { syncHistoryWithStore } from 'react-router-redux';
@@ -34,7 +30,7 @@ import 'babel-polyfill';
 //   document.getElementById('app'),
 // );
 
-// ReactDOM.render(
-//   <App />,
-//   document.getElementById('root'),
-// );
+ReactDOM.render(
+  <App />,
+  document.getElementById('root'),
+);

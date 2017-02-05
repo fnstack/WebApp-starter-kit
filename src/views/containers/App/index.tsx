@@ -4,7 +4,7 @@ class App extends React.Component<any, any> {
   public render() {
     return (
         <div>
-            Application
+            <h4>Application</h4>
         </div>
     );
   }

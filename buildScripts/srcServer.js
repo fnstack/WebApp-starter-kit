@@ -5,19 +5,18 @@ import webpack from 'webpack';
 import config from '../webpack.config.dev';
 var webpackMiddleware = require("webpack-dev-middleware-webpack-2");
 
-import chalk from 'chalk';
-
 /* eslint-disable no-console */
 
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
 
-console.log(chalk.yellow('Applying webpackMiddleware'));
 app.use(webpackMiddleware(compiler, {
   //noInfo: true,
   publicPath: config.output.publicPath
 }));
+
+console.log(process.env.NODE_ENV);
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../src/index.html'));

@@ -7,19 +7,18 @@ var stylelint = require('stylelint');
 var CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 
 export default {
-  //debug: true,
   devtool: 'inline-source-map',
   //noInfo: false,
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: [ '.ts', '.tsx', '.js', '.jsx' ],
     modules: [path.resolve(__dirname), 'node_modules', 'src'],
   },
 
   entry: {
     app: [
       'webpack-hot-middleware/client?reload=true',
-      path.resolve(__dirname, 'src/index.ts')
+      path.resolve(__dirname, 'src/index.tsx')
     ]
   },
   target: 'web',
@@ -30,8 +29,12 @@ export default {
     pathinfo: true
   },
   plugins: [
+    // Create HTML file that includes reference to bundled JS.
+    // new HtmlWebpackPlugin({
+    //   template: 'src/index.html',
+    //   inject: true
+    // }),
     new CheckerPlugin(),
-
     new webpack.LoaderOptionsPlugin({
       debug: true,
       options: {
@@ -51,14 +54,9 @@ export default {
         },
       }
     }),
-
-    // Create HTML file that includes reference to bundled JS.
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      inject: true
-    })
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ],
-
 
   module: {
     rules: [{
@@ -72,6 +70,7 @@ export default {
       },
       {
         test: /\.jsx$/,
+        exclude: /node_modules/,
         loader: 'babel-loader'
       },
       {

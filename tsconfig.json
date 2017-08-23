@@ -18,6 +18,9 @@
     "jsx": "react",
     "moduleResolution": "node"
   },
+  "include": [
+    "**/*"
+  ],
   "exclude": [
     "node_modules",
     "build",
@@ -27,5 +30,6 @@
   "awesomeTypescriptLoaderOptions": {
     "useCache": true,
     "useBabel": true
-  }
+  },
+  "allowSyntheticDefaultImports": true
 }

@@ -14,10 +14,8 @@
       "jsx-double"
     ],
     "no-var-requires": false,
-    "ordered-imports": false,
-    "member-ordering": [
-      false
-    ],
+    "ordered-imports": [false],
+    "member-ordering": [false],
     "object-literal-sort-keys": false,
     "no-shadowed-variable": false,
     "no-console": [
@@ -25,6 +23,8 @@
     ],
     "jsx-alignment": [
       false
-    ]
+    ],
+    "jsx-no-multiline-js": false,
+    "jsx-no-lambda": false
   }
 }

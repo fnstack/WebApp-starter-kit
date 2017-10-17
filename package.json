@@ -1,6 +1,6 @@
 {
   "name": "webapp-starter-kit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Starter kit for web front-end projects (React, Redux, Typescript).",
   "scripts": {
     "prestart": "babel-node buildScripts/startMessage.js",

@@ -128,6 +128,19 @@ export default {
           ],
           fallback: "style-loader"
         })
+      },  {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          use: [{
+            loader: "css-loader",
+            options: {
+              minimize: true
+            }
+          }, {
+            loader: "fast-sass-loader"
+          }],
+          fallback: "style-loader"
+        })
       }, {
         test: /\.eot(\?.*)?$/,
         loader: 'file-loader?name=fonts/[name].[hash].[ext]'

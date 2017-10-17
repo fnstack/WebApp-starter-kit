@@ -1,8 +1,6 @@
 import path from 'path';
 var webpack = require('webpack');
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-var postcssAssets = require('postcss-assets');
-var postcssNext = require('postcss-cssnext');
 var stylelint = require('stylelint');
 var SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 const { CheckerPlugin } = require('awesome-typescript-loader');
@@ -38,19 +36,7 @@ export default {
     new HtmlWebpackPlugin({template: 'src/index.html', inject: true}),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new CheckerPlugin(),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: function () {
-          return [
-            stylelint({
-              files: path.resolve(__dirname, 'src/**/*.css')
-            }),
-            postcssNext(),
-            postcssAssets({relative: true})
-          ];
-        }
-      }
-    }),
+
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
@@ -71,9 +57,21 @@ export default {
         test: /\.jsx$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
-      }, {
+      },  {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader']
+      }, {
+        test: /\.scss$/,
+        use: [{
+          loader: "style-loader"
+        }, {
+          loader: "css-loader",
+          options: {
+            sourceMap: true
+          }
+        }, {
+          loader: "fast-sass-loader"
+        }]
       }, {
         test: /\.eot(\?.*)?$/,
         loader: 'file-loader?name=fonts/.[ext]'

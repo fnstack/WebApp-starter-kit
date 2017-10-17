@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Helmet} from 'react-helmet';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Footer} from '../../shell';
-import ThemeDefault from '../../styles/themeDefault';
+import ThemeDefault from '../../sass/themeDefault';
 
 const favicon = require('./favicon.ico');
 

@@ -8,7 +8,7 @@ import {syncHistoryWithStore} from 'react-router-redux';
 import {configureStore, runSaga} from './data/Store';
 import 'isomorphic-fetch';
 import routes from './routes';
-import './styles/app.css';
+import './sass/app.scss';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import {IntlProvider, addLocaleData} from 'react-intl';
 import * as fr from 'react-intl/locale-data/fr';

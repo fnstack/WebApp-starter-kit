@@ -1,16 +1,11 @@
-import path from 'path';
-import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import WebpackMd5Hash from 'webpack-md5-hash';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackMd5Hash = require ('webpack-md5-hash');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 
-// const copySync = (src, dest, overwrite) => {   if (overwrite &&
-// fs.existsSync(dest)) {     fs.unlinkSync(dest);   }   const data =
-// fs.readFileSync(src);   fs.writeFileSync(dest, data); }
-// copySync('./src/favicon.ico', './dist/favicon.ico', true);
-
-export default {
+module.exports = {
   devtool : 'source-map',
   entry : {
     app: ['./src/index.tsx'],
@@ -20,14 +15,13 @@ export default {
       'react-router',
       'axios',
       'classnames',
-      'compression',
+      'es6-promise',
       'material-ui',
       'react-helmet',
       'react-intl',
       'react-redux',
       'react-router-redux',
       'react-tap-event-plugin',
-      'react-transition-group',
       'redux',
       'redux-connect',
       'redux-form',
@@ -108,14 +102,14 @@ export default {
   module : {
     loaders: [
       {
-        test: /\.tsx?$/,
+        test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
         loader: 'awesome-typescript-loader'
       }, {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      }, {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "source-map-loader"
+       }, {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           use: [

@@ -8,7 +8,8 @@
     },
     "outDir": "build",
     "module": "commonjs",
-    "target": "es6",
+    "target": "es5",
+    "lib": ["es5","es2015","dom", "dom.iterable", "scripthost"],
     "sourceMap": true,
     "inlineSourceMap": false,
     "inlineSources": false,
@@ -24,12 +25,12 @@
   "exclude": [
     "node_modules",
     "build",
+    "dist",
     "typings/main",
     "typings/main.d.ts"
   ],
   "awesomeTypescriptLoaderOptions": {
-    "useCache": true,
-    "useBabel": true
+    "useCache": true
   },
   "allowSyntheticDefaultImports": true
 }

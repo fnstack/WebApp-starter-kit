@@ -13,6 +13,7 @@ const environment: any = window || this;
 
 const sagaMiddleware = createSagaMiddleware(/* {sagaMonitor} */);
 
+// @ts-ignore: Unreachable code error
 let middlewares = [sagaMiddleware, routerMiddleware(hashHistory)];
 
 if (env === 'development')  {middlewares = [...middlewares, logger]; }

@@ -19,6 +19,7 @@ injectTapEventPlugin();
 addLocaleData([...fr]);
 
 const store = configureStore();
+// @ts-ignore: Unreachable code error
 const history = syncHistoryWithStore(hashHistory, store)as any;
 
 ReactDOM.render(

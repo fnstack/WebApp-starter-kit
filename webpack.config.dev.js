@@ -1,13 +1,11 @@
-import path from 'path';
-var webpack = require('webpack');
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-var stylelint = require('stylelint');
-var SimpleProgressPlugin = require('webpack-simple-progress-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 
-export default {
-  devtool : 'inline-source-map',
-  //noInfo: false,
+module.exports = {
+  devtool : 'source-map',
 
   resolve : {
     extensions: [
@@ -50,14 +48,16 @@ export default {
   module : {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
         loader: 'awesome-typescript-loader'
-      }, {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      },  {
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "source-map-loader"
+       },
+       {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader']
       }, {

@@ -12,16 +12,16 @@ const favicon = require('./favicon.ico');
  * @interface IAppProps
  */
 interface IAppProps {
-  children?: React.ReactElement < any >;
+  children?: React.ReactElement < {} >;
 }
 
 /**
  * The layout react component
  *
  * @class App
- * @extends {React.Component<IAppProps, any>}
+ * @extends {React.Component<IAppProps, {}>}
  */
-class App extends React.Component < IAppProps, any > {
+class App extends React.Component < IAppProps > {
 
   public render() {
 

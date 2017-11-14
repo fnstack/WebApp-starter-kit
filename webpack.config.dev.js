@@ -19,7 +19,7 @@ module.exports = {
   },
 
   entry : {
-    app: ['./src/index.tsx']
+    app: ['react-hot-loader/patch', './src/index.tsx']
   },
   target : 'web',
   output : {
@@ -50,7 +50,7 @@ module.exports = {
       {
         test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
-        loader: 'awesome-typescript-loader'
+        loaders:['react-hot-loader/webpack', 'awesome-typescript-loader']
       },
       {
         enforce: "pre",
@@ -91,5 +91,8 @@ module.exports = {
         loader: 'url-loader?limit=10000&name=images/[hash].[ext]'
       }
     ]
+  },
+  devServer: {
+    hot: true
   }
 }

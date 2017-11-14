@@ -6,7 +6,6 @@ import {Provider} from 'react-redux';
 import {Router, hashHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {configureStore, runSaga} from './data/Store';
-import 'isomorphic-fetch';
 import routes from './routes';
 import './sass/app.scss';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';

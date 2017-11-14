@@ -1,13 +1,11 @@
-import path from 'path';
-var webpack = require('webpack');
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-var stylelint = require('stylelint');
-var SimpleProgressPlugin = require('webpack-simple-progress-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 
-export default {
-  devtool : 'inline-source-map',
-  //noInfo: false,
+module.exports = {
+  devtool : 'source-map',
 
   resolve : {
     extensions: [
@@ -21,7 +19,7 @@ export default {
   },
 
   entry : {
-    app: ['./src/index.tsx']
+    app: ['react-hot-loader/patch', './src/index.tsx']
   },
   target : 'web',
   output : {
@@ -50,14 +48,16 @@ export default {
   module : {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
-        loader: 'awesome-typescript-loader'
-      }, {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      },  {
+        loaders:['react-hot-loader/webpack', 'awesome-typescript-loader']
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "source-map-loader"
+       },
+       {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader']
       }, {
@@ -91,5 +91,8 @@ export default {
         loader: 'url-loader?limit=10000&name=images/[hash].[ext]'
       }
     ]
+  },
+  devServer: {
+    hot: true
   }
 }

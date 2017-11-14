@@ -10,9 +10,9 @@ interface IFooterProps  {
  * The footer component
  *
  * @class Footer
- * @extends {React.Component<IFooterProps, any>}
+ * @extends {React.Component<IFooterProps, {}>}
  */
-class Footer extends React.Component < IFooterProps, any > {
+class Footer extends React.Component < IFooterProps, {} > {
   public render() {
 
     const {style} = this.props;

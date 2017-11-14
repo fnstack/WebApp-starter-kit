@@ -18,6 +18,7 @@
     "member-ordering": [false],
     "object-literal-sort-keys": false,
     "no-shadowed-variable": false,
+    "no-submodule-imports": false,
     "no-console": [
       false
     ],

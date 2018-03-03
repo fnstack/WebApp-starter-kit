@@ -1,42 +1,42 @@
-import createSagaMiddleware from 'redux-saga';
-import {createStore, applyMiddleware, compose} from 'redux';
-import {hashHistory} from 'react-router';
-import {routerMiddleware} from 'react-router-redux';
-import {persistStore, autoRehydrate} from 'redux-persist';
+// import createSagaMiddleware from 'redux-saga';
+// import {createStore, applyMiddleware, compose} from 'redux';
+// import {hashHistory} from 'react-router';
+// import {routerMiddleware} from 'react-router-redux';
+// import {persistStore, autoRehydrate} from 'redux-persist';
 
-import {logger} from '../base';
-import {rootReducer} from '../data';
+// import {logger} from '../base';
+// import {rootReducer} from '../data';
 
-const env = process.env.NODE_ENV;
+// const env = process.env.NODE_ENV;
 
-const environment: any = window || this;
+// const environment: any = window || this;
 
-const sagaMiddleware = createSagaMiddleware(/* {sagaMonitor} */);
+// const sagaMiddleware = createSagaMiddleware(/* {sagaMonitor} */);
 
-// @ts-ignore: Unreachable code error
-let middlewares = [sagaMiddleware, routerMiddleware(hashHistory)];
+// // @ts-ignore: Unreachable code error
+// let middlewares = [sagaMiddleware, routerMiddleware(hashHistory)];
 
-if (env === 'development')  {middlewares = [...middlewares, logger]; }
+// if (env === 'development')  {middlewares = [...middlewares, logger]; }
 
-  // const devTools = window.devToolsExtension ?
-  // compose(applyMiddleware(sagaMiddleware), window.devToolsExtension())     :
-  // applyMiddleware(sagaMiddleware);
+//   // const devTools = window.devToolsExtension ?
+//   // compose(applyMiddleware(sagaMiddleware), window.devToolsExtension())     :
+//   // applyMiddleware(sagaMiddleware);
 
-export const configureStore = () => {
+// export const configureStore = () => {
 
-  const store = createStore(rootReducer, compose(applyMiddleware(...middlewares),
-    autoRehydrate(), env === 'development' && environment.devToolsExtension ?
-     environment.devToolsExtension() : (f) => f));
+//   const store = createStore(rootReducer, compose(applyMiddleware(...middlewares),
+//     autoRehydrate(), env === 'development' && environment.devToolsExtension ?
+//      environment.devToolsExtension() : (f) => f));
 
-  try {
-    persistStore(store);
-  } catch (e) {
-    console.error(e);
-  }
-  return store;
-};
+//   try {
+//     persistStore(store);
+//   } catch (e) {
+//     console.error(e);
+//   }
+//   return store;
+// };
 
-export const runSaga = () => {
-  // Todo: Run different saga here
-  // sagaMiddleware.run(userSaga);
-};
+// export const runSaga = () => {
+//   // Todo: Run different saga here
+//   // sagaMiddleware.run(userSaga);
+// };

@@ -21,8 +21,7 @@
     "clean-lib": "rimraf ./node_modules",
     "prebuild": "npm-run-all clean-dist clean-coverage lint",
     "build": "node buildScripts/build.js",
-    "postbuild": "node buildScripts/distServer.js",
-    "precommit": "lint-staged"
+    "postbuild": "node buildScripts/distServer.js"
   },
   "author": "Hse Dev Team",
   "dependencies": {

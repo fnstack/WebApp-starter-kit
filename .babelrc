@@ -1,17 +1,19 @@
 {
-  "presets": ["react", ["env", {
-    "targets": {
-      "browsers": ["last 5 versions", "ie >= 8"],
-      "modules": false
-    }
-  }]],
-  "plugins": ["react-hot-loader/babel", "syntax-dynamic-import"],
-  "env": {
-    "development": {
-      "presets": ["react-hmre"]
-    },
-    "test": {
-      "plugins": ["istanbul", "transform-es2015-modules-commonjs"]
-    }
-  }
+  "presets": [
+    "react",
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 versions",
+            "edge >= 13"
+          ]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "react-hot-loader/babel"
+  ]
 }

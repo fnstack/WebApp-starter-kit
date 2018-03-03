@@ -2,14 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "*": [
-        "src/*"
-      ]
+      "*": ["src/*"]
     },
     "outDir": "build",
     "module": "commonjs",
-    "target": "es5",
-    "lib": ["es5","es2015","dom", "dom.iterable", "scripthost"],
+    "target": "es6",
+    "lib": ["es5", "es2015", "dom", "dom.iterable", "scripthost"],
     "sourceMap": true,
     "inlineSourceMap": false,
     "inlineSources": false,
@@ -19,9 +17,7 @@
     "jsx": "react",
     "moduleResolution": "node"
   },
-  "include": [
-    "**/*"
-  ],
+  "include": ["**/*"],
   "exclude": [
     "node_modules",
     "build",
@@ -30,7 +26,9 @@
     "typings/main.d.ts"
   ],
   "awesomeTypescriptLoaderOptions": {
-    "useCache": true
+    "useCache": true,
+    "forceIsolatedModules": true,
+    "reportFiles": ["src/**/*.{ts,tsx}"]
   },
   "allowSyntheticDefaultImports": true
 }

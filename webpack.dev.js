@@ -1,33 +1,34 @@
-const path = require("path");
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const SimpleProgressPlugin = require("webpack-simple-progress-plugin");
-const merge = require("webpack-merge");
-const common = require("./webpack.common.js");
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
+const merge = require('webpack-merge');
+const common = require('./webpack.common.js');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-const port = 3003;
+const port = 3000;
 
 module.exports = merge(common, {
-  devtool: "source-map",
+  devtool: 'cheap-module-eval-source-map',
 
-  entry: ["./src/index.tsx"],
-
-  target: "web",
+  target: 'web',
   output: {
-    path: path.resolve(__dirname, "src"),
-    publicPath: "/",
-    filename: "bundle.js",
+    path: path.resolve(__dirname, 'src'),
+    publicPath: '/',
+    filename: '[name].js',
     pathinfo: true
   },
 
   plugins: [
     // Create HTML file that includes reference to bundled JS.
-    new HtmlWebpackPlugin({template: "src/index.html", inject: true}),
+    new HtmlWebpackPlugin({ template: 'src/index.html', favicon: 'src/favicon.ico', inject: true }),
+
+    new ForkTsCheckerWebpackPlugin(),
 
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: '"development"'
+      'process.env': {
+        NODE_ENV: "'development'"
       }
     })
   ],
@@ -37,34 +38,57 @@ module.exports = merge(common, {
       {
         test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'ts-loader'],
-      }, {
-        enforce: "pre",
+        use: [
+          {
+            loader: 'cache-loader'
+          },
+          {
+            loader: 'thread-loader',
+            options: {
+              workers: require('os').cpus().length - 1
+            }
+          },
+          {
+            loader: 'babel-loader'
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              happyPackMode: true
+            }
+          }
+        ]
+      },
+      {
+        enforce: 'pre',
         test: /\.js$/,
-        loader: "source-map-loader"
-      }, {
+        loader: 'source-map-loader'
+      },
+      {
         test: /\.css$/,
-        loaders: ["style-loader", "css-loader"]
-      }, {
+        loaders: ['style-loader', 'css-loader']
+      },
+      {
         test: /\.scss$/,
         use: [
           {
-            loader: "style-loader"
-          }, {
-            loader: "css-loader",
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
             options: {
               sourceMap: true
             }
-          }, {
-            loader: "fast-sass-loader"
+          },
+          {
+            loader: 'sass-loader'
           }
         ]
       }
     ]
   },
   devServer: {
-    contentBase: "/",
-    compress: true,
+    contentBase: '/',
     port,
     hot: true,
     open: true,
@@ -74,7 +98,8 @@ module.exports = merge(common, {
         {
           from: /^\/$/,
           to: '/index.html'
-        }, {
+        },
+        {
           from: /^\/silent_renew.html/,
           to: 'src/security/silentRenew/silent_renew.html'
         }

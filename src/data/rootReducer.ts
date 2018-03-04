@@ -1,16 +1,18 @@
-// import {combineReducers, ReducersMapObject} from 'redux';
-// import {routerReducer} from 'react-router-redux';
-// import {reducer as formReducer} from 'redux-form';
-// import {IApplicationState} from 'data';
+import { routerReducer } from 'react-router-redux';
+import { combineReducers, ReducersMapObject } from 'redux';
+import { reducer as formReducer } from 'redux-form';
+import { reducer as oidcReducer } from 'redux-oidc';
 
-// /**
-//  * The root reducer of the application
-//  */
-// const reducerMap: ReducersMapObject = {
+import { ApplicationState } from 'data';
 
-//   form: formReducer,
+/**
+ * The root reducer of the application
+ */
+const reducerMap: ReducersMapObject = {
+  // Todo: Add other reducer here
+  form: formReducer,
+  oidc: oidcReducer,
+  router: routerReducer
+};
 
-//   routing: routerReducer,
-// };
-
-// export const rootReducer = combineReducers<IApplicationState>(reducerMap);
+export const rootReducer = combineReducers<ApplicationState>(reducerMap);

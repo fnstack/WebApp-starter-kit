@@ -1,42 +1,60 @@
-// import createSagaMiddleware from 'redux-saga';
-// import {createStore, applyMiddleware, compose} from 'redux';
-// import {hashHistory} from 'react-router';
-// import {routerMiddleware} from 'react-router-redux';
-// import {persistStore, autoRehydrate} from 'redux-persist';
+import createSagaMiddleware from 'redux-saga';
+import { applyMiddleware, compose, createStore } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import { rootReducer, rootSaga } from '../data';
+import { createBrowserHistory } from 'history';
+import { routerMiddleware } from 'react-router-redux';
+import { logger } from '../shared';
+import storage from 'redux-persist/lib/storage';
+import { loadUser } from 'redux-oidc';
+import { userManager } from '../security';
 
-// import {logger} from '../base';
-// import {rootReducer} from '../data';
+const env = process.env.NODE_ENV;
 
-// const env = process.env.NODE_ENV;
+const environment: any = window || this;
 
-// const environment: any = window || this;
+const sagaMiddleware = createSagaMiddleware();
 
-// const sagaMiddleware = createSagaMiddleware(/* {sagaMonitor} */);
+const history = createBrowserHistory();
 
-// // @ts-ignore: Unreachable code error
-// let middlewares = [sagaMiddleware, routerMiddleware(hashHistory)];
+let middlewares = [sagaMiddleware, routerMiddleware(history)];
 
-// if (env === 'development')  {middlewares = [...middlewares, logger]; }
+if (env === 'development') {
+  middlewares = [...middlewares, logger];
+}
 
-//   // const devTools = window.devToolsExtension ?
-//   // compose(applyMiddleware(sagaMiddleware), window.devToolsExtension())     :
-//   // applyMiddleware(sagaMiddleware);
+/**
+ * Create and initialize the redux store
+ *
+ * @returns The redux store
+ */
+export const configureStore = () => {
+  const persistConfig = {
+    key: 'root',
+    storage,
+    blacklist: ['router']
+  };
 
-// export const configureStore = () => {
+  const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-//   const store = createStore(rootReducer, compose(applyMiddleware(...middlewares),
-//     autoRehydrate(), env === 'development' && environment.devToolsExtension ?
-//      environment.devToolsExtension() : (f) => f));
+  const store = createStore(
+    persistedReducer,
+    compose(
+      applyMiddleware(...middlewares),
+      // prettier-ignore
+      env === 'development' && environment.devToolsExtension
+        ? environment.devToolsExtension()
+        : (f) => f
+    )
+  );
 
-//   try {
-//     persistStore(store);
-//   } catch (e) {
-//     console.error(e);
-//   }
-//   return store;
-// };
+  const persistor = persistStore(store);
 
-// export const runSaga = () => {
-//   // Todo: Run different saga here
-//   // sagaMiddleware.run(userSaga);
-// };
+  loadUser(persistor, userManager);
+
+  return { store, persistor };
+};
+
+export const runSaga = () => {
+  sagaMiddleware.run(rootSaga);
+};

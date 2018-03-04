@@ -1,0 +1,52 @@
+.icon-btn {
+  cursor: pointer;
+  margin: 0 0.25em 0 0.25em
+}
+
+.icon-btn-add {
+  @extend .icon-btn;
+
+  $color: $green;
+
+  color: $color;
+
+  &:hover {
+    color: darken($color, 5%);
+
+    &::before {
+      color: darken($color, 10%);
+    }
+  }
+}
+
+.icon-btn-edit {
+  @extend .icon-btn;
+
+  $color: $orange;
+
+  color: $color;
+
+  &:hover {
+    color: darken($color, 5%);
+
+    &::before {
+      color: darken($color, 10%);
+    }
+  }
+}
+
+.icon-btn-delete {
+  @extend .icon-btn;
+
+  $color: $red;
+
+  color: $color;
+
+  &:hover {
+    color: darken($color, 5%);
+
+    &::before {
+      color: darken($color, 10%);
+    }
+  }
+}

@@ -1,7 +1,16 @@
-body {
-  font-family: Sans-Serif;
-}
 
-table th {
-  padding: 5px
-}
+// Override Boostrap variables
+@import "bootstrap-variables";
+
+// Import Bootstrap source files
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Import core styles
+@import "core/core";
+
+//Import styles for buttons icons
+@import "icons-button";
+
+//Import animations
+@import "loaders";
+

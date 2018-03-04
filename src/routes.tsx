@@ -1,11 +1,9 @@
-import * as React from 'react';
-import {Route, IndexRoute} from 'react-router';
+// tslint:disable:quotemark
+const routeNames = {
+  '/': 'Accueil',
+  '/accueil': "Page d'accueil",
+  '/users': 'Utilisateurs',
+  '/users/profile': 'Profile'
+};
 
-import {Layout, NotFoundPage} from './shell';
-
-export default(
-  <Route path="/" component={Layout}>
-    <IndexRoute component={NotFoundPage}/>
-    <Route path="*" component={NotFoundPage}/>
-  </Route>
-);
+export { routeNames };

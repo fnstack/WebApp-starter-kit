@@ -2,30 +2,46 @@ import 'babel-polyfill';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
-import {Router, hashHistory} from 'react-router';
-import {syncHistoryWithStore} from 'react-router-redux';
-import {configureStore, runSaga} from './data/Store';
-import routes from './routes';
+import { Provider } from 'react-redux';
+import { configureStore, runSaga } from './data/Store';
+import 'simple-line-icons/css/simple-line-icons.css';
 import './sass/app.scss';
-import * as injectTapEventPlugin from 'react-tap-event-plugin';
-import {IntlProvider, addLocaleData} from 'react-intl';
-import * as fr from 'react-intl/locale-data/fr';
+import 'cropperjs/dist/cropper.css';
+import 'toastr/build/toastr.min.css';
+import { ConnectedRouter } from 'react-router-redux';
+import { createBrowserHistory } from 'history';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { App, Page404 } from './app';
+import { OidcProvider } from 'redux-oidc';
+import { userManager, CallbackPage } from './security';
+// import { interceptor } from './shared';
 
-injectTapEventPlugin();
+const history = createBrowserHistory();
 
-// Configure fr culture
-addLocaleData([...fr]);
-
-const store = configureStore();
-// @ts-ignore: Unreachable code error
-const history = syncHistoryWithStore(hashHistory, store)as any;
+const { store, persistor } = configureStore();
 
 ReactDOM.render(
   <Provider store={store} key="provider">
-  <IntlProvider locale="fr">
-    <Router history={history} routes={routes}/>
-  </IntlProvider>
-</Provider>, document.getElementById('root') as HTMLElement);
+    <PersistGate loading={null} persistor={persistor}>
+      <OidcProvider store={store} userManager={userManager}>
+        <ConnectedRouter history={history}>
+          <BrowserRouter>
+            <Switch>
+              <Route path="/callback" component={CallbackPage} />
 
+              <Route path="/" component={App} />
+
+              <Route component={Page404} />
+            </Switch>
+          </BrowserRouter>
+        </ConnectedRouter>
+      </OidcProvider>
+    </PersistGate>
+  </Provider>,
+  document.getElementById('root') as HTMLElement
+);
+
+// Todo : Enable interceptor when security is ready in the back end
+// interceptor();
 runSaga();

@@ -1,8 +1,9 @@
-const Enzyme =  require('enzyme');
+const Enzyme = require('enzyme');
 const Adapter = require('enzyme-adapter-react-16');
 require('raf/polyfill');
 
 Enzyme.configure({ adapter: new Adapter() });
+jest.mock('redux-oidc', () => ({ createUserManager: () => jest.fn() }));
 
 /* eslint-disable no-console */
 console.error = message => {

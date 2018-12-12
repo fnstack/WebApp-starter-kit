@@ -1,9 +1,13 @@
 {
   "name": "webapp-starter-kit",
-  "version": "0.4.0",
-  "description": "Starter kit for web front-end projects (React, Redux, Typescript).",
+  "version": "0.5.0",
+  "description": "Starter kit for web front-end projects (React, react-apollo, Typescript).",
   "keywords": [
-    "typescript"
+    "typescript",
+    "react",
+    "react-apollo",
+    "graphQL",
+    "ant design"
   ],
   "homepage": "https://bitbucket.org/fnstack-frontend-team/dgddi-vms-web/src",
   "author": "Fn Stacks Dev team",

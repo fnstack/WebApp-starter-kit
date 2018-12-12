@@ -7,10 +7,18 @@ export default {
       key: '1'
     },
     {
-      name: 'Utilisateurs',
-      url: '/user',
-      icon: 'user',
-      key: '2'
+      name: 'Menu test',
+      url: '/main',
+      icon: 'appstore',
+      key: '2',
+      children: [
+        {
+          name: 'Menu child',
+          url: '/main/child',
+          icon: 'smile',
+          key: '1'
+        }
+      ]
     }
   ]
 };

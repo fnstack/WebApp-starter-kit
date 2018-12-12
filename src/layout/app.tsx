@@ -5,6 +5,7 @@ import './app.less';
 import { Header, SideMenu, Breadcrumb } from './components';
 import { Route, Switch, Link } from 'react-router-dom';
 import { Page404 } from './page404';
+import { MenuTests } from 'menuTests';
 
 // @ts-ignore no relevant error
 import * as logo from '../images/logo.png';
@@ -51,7 +52,7 @@ class App extends React.PureComponent<{}, AppState> {
             </Link>
             {!collapsed && (
               <Link to="/">
-                <span>Webb Starter kit</span>
+                <span>Web Starter kit</span>
               </Link>
             )}
           </div>
@@ -71,12 +72,12 @@ class App extends React.PureComponent<{}, AppState> {
             }}
           >
             <Switch>
-              {/* <Route path="/users" component={Directions} /> */}
+              <Route path="/main/child" component={MenuTests} />
 
               <Route component={Page404} />
             </Switch>
           </Content>
-          <Footer style={{ textAlign: 'center', color: '#fff' }}>Webb app starter kit © 2018 FnStack, Inc.</Footer>
+          <Footer style={{ textAlign: 'center' }}>Webb app starter kit © 2018 FnStack, Inc.</Footer>
         </Layout>
       </Layout>
     );

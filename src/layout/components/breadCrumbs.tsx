@@ -6,7 +6,8 @@ import './layout.less';
 const routeNames = {
   '/': 'Tableau de bord',
   '/dashboard': 'Tableau de bord',
-  '/users': 'Utilisateurs'
+  '/main': 'Menu',
+  '/main/smile': 'Menu test'
 };
 
 const findRouteName = url => routeNames[url];

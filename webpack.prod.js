@@ -93,6 +93,24 @@ module.exports = merge(common, {
           ],
           fallback: 'style-loader'
         })
+      },
+      {
+        test: /\.less$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                minimize: true
+              }
+            },
+            {
+              loader: 'less-loader',
+              options: { javascriptEnabled: true }
+            }
+          ],
+          fallback: 'style-loader'
+        })
       }
     ]
   }

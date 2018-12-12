@@ -1,47 +1,64 @@
-import 'babel-polyfill';
-
+import '@babel/polyfill';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { configureStore, runSaga } from './data/Store';
-import 'simple-line-icons/css/simple-line-icons.css';
-import './sass/app.scss';
-import 'cropperjs/dist/cropper.css';
-import 'toastr/build/toastr.min.css';
-import { ConnectedRouter } from 'react-router-redux';
-import { createBrowserHistory } from 'history';
-import { PersistGate } from 'redux-persist/lib/integration/react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { App, Page404 } from './app';
-import { OidcProvider } from 'redux-oidc';
-import { userManager, CallbackPage } from './security';
-// import { interceptor } from './shared';
+import * as ReactDom from 'react-dom';
+import './styles/sass/app.scss';
+import { BrowserRouter } from 'react-router-dom';
+import { Routes } from './routes';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient, HttpLink, InMemoryCache, ApolloLink, split } from 'apollo-boost';
+import { getMainDefinition } from 'apollo-utilities';
+import { withClientState } from 'apollo-link-state';
+import { WebSocketLink } from 'apollo-link-ws';
+import { createUploadLink } from 'apollo-upload-client';
+import { config } from './config';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import fr from 'react-intl/locale-data/fr';
 
-const history = createBrowserHistory();
+addLocaleData([...fr]);
 
-const { store, persistor } = configureStore();
+const cache = new InMemoryCache();
 
-ReactDOM.render(
-  <Provider store={store} key="provider">
-    <PersistGate loading={null} persistor={persistor}>
-      <OidcProvider store={store} userManager={userManager}>
-        <ConnectedRouter history={history}>
-          <BrowserRouter>
-            <Switch>
-              <Route path="/callback" component={CallbackPage} />
+const httpLink = new HttpLink({ uri: config.api.uri });
 
-              <Route path="/" component={App} />
+const uploadLink = createUploadLink({ uri: config.api.uri });
 
-              <Route component={Page404} />
-            </Switch>
-          </BrowserRouter>
-        </ConnectedRouter>
-      </OidcProvider>
-    </PersistGate>
-  </Provider>,
-  document.getElementById('root') as HTMLElement
+const wsLink = new WebSocketLink({
+  uri: config.api.wsUri,
+  options: {
+    reconnect: true
+  }
+});
+
+const stateLink = withClientState({
+  cache,
+  defaults: {},
+  resolvers: {
+    Mutation: {}
+  }
+});
+
+const link = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+  },
+  wsLink,
+  httpLink
 );
 
-// Todo : Enable interceptor when security is ready in the back end
-// interceptor();
-runSaga();
+const client = new ApolloClient({
+  cache,
+  link: ApolloLink.from([stateLink, link, uploadLink]),
+  connectToDevTools: process.env.NODE_ENV === 'development'
+});
+
+ReactDom.render(
+  <ApolloProvider client={client}>
+    <IntlProvider locale="fr">
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </IntlProvider>
+  </ApolloProvider>,
+  document.getElementById('root')
+);

@@ -1,19 +1,12 @@
 {
   "presets": [
-    "react",
+    ["@babel/preset-react"],
     [
-      "env",
+      "@babel/preset-env",
       {
-        "targets": {
-          "browsers": [
-            "last 2 versions",
-            "edge >= 13"
-          ]
-        }
+        "useBuiltIns": "entry"
       }
     ]
   ],
-  "plugins": [
-    "react-hot-loader/babel"
-  ]
+  "plugins": ["@babel/plugin-syntax-dynamic-import", "react-hot-loader/babel"]
 }

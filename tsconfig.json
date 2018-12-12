@@ -5,9 +5,9 @@
       "*": ["src/*"]
     },
     "outDir": "build",
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es6",
-    "lib": ["es5", "es2015", "dom", "dom.iterable", "scripthost"],
+    "lib": ["es2016", "es2018", "esnext", "dom", "dom.iterable", "scripthost", "esnext.asynciterable","es2018.promise"],
     "sourceMap": true,
     "inlineSourceMap": false,
     "inlineSources": false,
@@ -15,16 +15,13 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "jsx": "react",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "importHelpers":true,
+    "noImplicitAny": false,
+    "esModuleInterop":true
   },
   "include": ["**/*"],
-  "exclude": [
-    "node_modules",
-    "build",
-    "dist",
-    "typings/main",
-    "typings/main.d.ts"
-  ],
+  "exclude": ["node_modules", "build", "dist", "typings/main", "typings/main.d.ts"],
   "awesomeTypescriptLoaderOptions": {
     "useCache": true,
     "forceIsolatedModules": true,

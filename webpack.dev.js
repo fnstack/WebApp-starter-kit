@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -9,9 +8,8 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const port = 3000;
 
 module.exports = merge(common, {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-module-source-map',
 
-  target: 'web',
   output: {
     path: path.resolve(__dirname, 'src'),
     publicPath: '/',
@@ -21,7 +19,7 @@ module.exports = merge(common, {
 
   plugins: [
     // Create HTML file that includes reference to bundled JS.
-    new HtmlWebpackPlugin({ template: 'src/index.html', favicon: 'src/favicon.ico', inject: true }),
+    new HtmlWebpackPlugin({ template: 'src/index.html', favicon: 'src/favicon.ico' }),
 
     new ForkTsCheckerWebpackPlugin(),
 
@@ -84,6 +82,24 @@ module.exports = merge(common, {
             loader: 'sass-loader'
           }
         ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader' // creates style nodes from JS strings
+          },
+          {
+            loader: 'css-loader', // translates CSS into CommonJS
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'less-loader', // compiles Less to CSS
+            options: { javascriptEnabled: true }
+          }
+        ]
       }
     ]
   },
@@ -92,18 +108,18 @@ module.exports = merge(common, {
     port,
     hot: true,
     open: true,
-
-    historyApiFallback: {
-      rewrites: [
-        {
-          from: /^\/$/,
-          to: '/index.html'
-        },
-        {
-          from: /^\/silent_renew.html/,
-          to: 'src/security/silentRenew/silent_renew.html'
+    before(app) {
+      app.use(function(req, res, next) {
+        if (path.extname(req.path).length > 0) {
+          next();
+        } else {
+          req.url = '/index.html';
+          next();
         }
-      ]
+      });
+      app.get('/', function(req, res) {
+        res.sendFile(path.join(__dirname, '/src/index.html'));
+      });
     }
   }
 });

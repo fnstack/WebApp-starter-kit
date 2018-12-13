@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Query } from 'react-apollo';
-import { notification, Row, Button, Col, Divider, List, Popconfirm, Icon, Skeleton } from 'antd';
+import { notification, Row, Button, Col, Divider, List, Popconfirm, Icon, Skeleton, Avatar } from 'antd';
 import Helmet from 'react-helmet';
 import { getAllUsers } from './queries';
 import { IconButtonAction } from 'shared';
@@ -73,10 +73,11 @@ class MenuTests extends React.PureComponent {
                           <IconButtonAction
                             key="edit"
                             title="Modifier"
-                            size="default"
+                            size="small"
                             icon="edit"
                             item={item}
                             type="primary"
+                            ghost
                           />,
                           <Popconfirm
                             key="p-d-delete"
@@ -88,16 +89,21 @@ class MenuTests extends React.PureComponent {
                             <Button
                               key="d-delete"
                               title="Supprimer"
-                              size="default"
+                              size="small"
                               icon="delete"
                               type="danger"
                               shape="circle"
+                              ghost
                             />
                           </Popconfirm>
                         ]}
                       >
                         <Skeleton avatar title={false} loading={item.loading} active>
-                          <List.Item.Meta title={`${item.firstName} ${item.lastName}`} />
+                          <List.Item.Meta
+                            avatar={<Avatar src={item.avatar} />}
+                            title={`${item.firstName} ${item.lastName}`}
+                            description={item.email}
+                          />
                         </Skeleton>
                       </List.Item>
                     )}

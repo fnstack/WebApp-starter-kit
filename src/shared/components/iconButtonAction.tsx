@@ -11,6 +11,7 @@ interface IconButtonActionProps {
   icon: string;
   item: any;
   onOpenModal?: (item: any) => void;
+  ghost: boolean;
 }
 
 /**
@@ -19,7 +20,7 @@ interface IconButtonActionProps {
  * @returns IconButtonAction as react stateless component
  */
 const IconButtonAction: React.StatelessComponent<IconButtonActionProps> = props => {
-  const { className, style, title, icon, size, type } = props;
+  const { className, style, title, icon, size, type, ghost } = props;
 
   const handleClick = () => {
     const { onOpenModal, item } = props;
@@ -37,6 +38,7 @@ const IconButtonAction: React.StatelessComponent<IconButtonActionProps> = props 
           className={className}
           style={style}
           onClick={handleClick}
+          ghost={ghost}
         />
       </Tooltip>
     </>

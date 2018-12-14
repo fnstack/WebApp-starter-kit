@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { Query } from 'react-apollo';
-import { notification } from 'antd';
+import { Query, Mutation } from 'react-apollo';
+import { notification, Modal, Button } from 'antd';
 import Helmet from 'react-helmet';
 import { getAllUsers } from './queries';
-import { MenuTestList } from './components';
+import { MenuTestList, AddUserForm } from './components';
+import { registerUser } from './mutations';
+
+interface MenuTestListState {
+  showHideAddModal: boolean;
+}
 
 /**
  * The MenuTest component
@@ -11,7 +16,14 @@ import { MenuTestList } from './components';
  * @class MenuTests
  * @extends {React.PureComponent}
  */
-class MenuTests extends React.PureComponent {
+class MenuTests extends React.PureComponent<{}, MenuTestListState> {
+  public state = {
+    showHideAddModal: false
+  };
+
+  private handleShowHideAddModal = () => {
+    this.setState({ showHideAddModal: !this.state.showHideAddModal });
+  };
   public render() {
     return (
       <>
@@ -41,14 +53,65 @@ class MenuTests extends React.PureComponent {
                   <title>Webb Starter kit - MenuTests</title>
                 </Helmet>
 
-                <MenuTestList sources={rows} loading={loading} handleRefetch={handleRefetch} />
+                <MenuTestList
+                  sources={rows}
+                  loading={loading}
+                  handleRefetch={handleRefetch}
+                  onAdd={this.handleShowHideAddModal}
+                />
               </>
             );
           }}
         </Query>
+        {this.registerUserModal()}
       </>
     );
   }
+
+  private registerUserModal = () => {
+    const { showHideAddModal: showAddModal } = this.state;
+
+    /* tslint:disable:jsx-no-lambda */
+    return (
+      <Mutation key="registerUser" mutation={registerUser}>
+        {(registerUser, { data, error }) => {
+          if (error) {
+            this.handleShowHideAddModal();
+
+            notification.error({
+              message: 'Error!',
+              description: `L'erreur "${error}", s'est produite pendant l'enregistrement de l'utilisateur`
+            });
+            return null;
+          }
+
+          return (
+            <Modal
+              visible={showAddModal}
+              title="Ajouter un type de carrier"
+              onCancel={this.handleShowHideAddModal}
+              footer={[
+                <Button key="back" onClick={this.handleShowHideAddModal}>
+                  Annuler
+                </Button>,
+                <Button
+                  key="submit"
+                  type="primary"
+                  htmlType="submit"
+                  loading={data && data.register && data.register.token}
+                  form="AddUserForm"
+                >
+                  Créer
+                </Button>
+              ]}
+            >
+              <AddUserForm onSubmit={registerUser} onCloseModal={this.handleShowHideAddModal} />
+            </Modal>
+          );
+        }}
+      </Mutation>
+    );
+  };
 }
 
 export { MenuTests };

@@ -8,6 +8,7 @@ interface MenuTestListProps {
   handleRefetch: () => void;
   sources: any[];
   loading: boolean;
+  onAdd: () => void;
 }
 
 /**
@@ -20,14 +21,15 @@ const MenuTestList: React.StatelessComponent<MenuTestListProps> = ({
   style,
   handleRefetch,
   sources,
-  loading
+  loading,
+  onAdd
 }) => {
   return (
     <>
       <div className={className} style={style}>
         <Row gutter={24}>
           <Col span={8}>
-            <Button type="primary" icon="file-add">
+            <Button type="primary" icon="file-add" onClick={onAdd}>
               Ajouter
             </Button>
             <Button type="primary" style={{ marginLeft: 10 }} icon="retweet" ghost onClick={handleRefetch}>

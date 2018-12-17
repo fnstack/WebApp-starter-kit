@@ -36,7 +36,14 @@ class MenuTests extends React.PureComponent<{}, MenuTestListState> {
                 message: 'Error!',
                 description: `L'erreur "${error}", s'est produite pendant le chargement de la MenuTest`
               });
-              return <MenuTestList sources={[]} loading={loading} handleRefetch={handleRefetch} />;
+              return (
+                <MenuTestList
+                  onAdd={this.handleShowHideAddModal}
+                  sources={[]}
+                  loading={loading}
+                  handleRefetch={handleRefetch}
+                />
+              );
             }
 
             let rows = [];
@@ -74,7 +81,7 @@ class MenuTests extends React.PureComponent<{}, MenuTestListState> {
     /* tslint:disable:jsx-no-lambda */
     return (
       <Mutation key="registerUser" mutation={registerUser}>
-        {(registerUser, { data, error }) => {
+        {(registerUser, { loading, data, error }) => {
           if (error) {
             this.handleShowHideAddModal();
 
@@ -94,18 +101,12 @@ class MenuTests extends React.PureComponent<{}, MenuTestListState> {
                 <Button key="back" onClick={this.handleShowHideAddModal}>
                   Annuler
                 </Button>,
-                <Button
-                  key="submit"
-                  type="primary"
-                  htmlType="submit"
-                  loading={data && data.register && data.register.token}
-                  form="AddUserForm"
-                >
+                <Button key="submit" type="primary" htmlType="submit" loading={loading} form="AddUserForm">
                   Créer
                 </Button>
               ]}
             >
-              <AddUserForm onSubmit={registerUser} onCloseModal={this.handleShowHideAddModal} />
+              <AddUserForm onSubmit={registerUser} loading={loading} onCloseModal={this.handleShowHideAddModal} />
             </Modal>
           );
         }}

@@ -7,6 +7,7 @@ const FormItem = Form.Item;
 interface AddUserProps extends FormComponentProps {
   onSubmit: (value: { variables: any }) => void;
   onCloseModal: () => void;
+  loading: boolean;
 }
 
 interface AddUserState {
@@ -25,15 +26,17 @@ class AddUser extends React.PureComponent<AddUserProps, AddUserState> {
 
   private handleSubmit = e => {
     e.preventDefault();
-    const { onSubmit, onCloseModal, form } = this.props;
+    const { onSubmit, onCloseModal, form, loading } = this.props;
 
-    form.validateFields(async (err, values) => {
+    form.validateFields(async (err, variables) => {
       if (!err) {
         await onSubmit({
-          variables: { input: values }
+          variables
         });
 
-        onCloseModal();
+        if (!loading) {
+          onCloseModal();
+        }
       }
     });
   };
@@ -101,11 +104,6 @@ class AddUser extends React.PureComponent<AddUserProps, AddUserState> {
                 onBlur={this.handleConfirmBlur}
               />
             )}
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('expiresIn', {
-              rules: [{ required: true, message: `Veuillez entrer la date d'expiration` }]
-            })(<DatePicker placeholder="Date d'expiration" format="DD/MM/YYYY" />)}
           </FormItem>
         </Form>
       </>

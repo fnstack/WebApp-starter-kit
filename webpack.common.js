@@ -3,7 +3,7 @@ const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 
 module.exports = {
   entry: {
-    app: [path.resolve(__dirname, 'src/index.tsx')]
+    index: [path.resolve(__dirname, 'src/index.tsx')]
   },
 
   resolve: {

@@ -7,7 +7,7 @@ interface LoaderProps {
   fullScreen?: boolean;
 }
 
-const Loader = (props: LoaderProps) => {
+const Loader: React.SFC<LoaderProps> = props => {
   const { spinning, fullScreen } = props;
   return (
     <div

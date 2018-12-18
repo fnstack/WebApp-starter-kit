@@ -81,7 +81,7 @@ class MenuTests extends React.PureComponent<{}, MenuTestListState> {
     /* tslint:disable:jsx-no-lambda */
     return (
       <Mutation key="registerUser" mutation={registerUser}>
-        {(registerUser, { loading, data, error }) => {
+        {(registerUser, { loading, error }) => {
           if (error) {
             this.handleShowHideAddModal();
 

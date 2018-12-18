@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Input, Icon, DatePicker } from 'antd';
+import { Form, Input, Icon } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 
 const FormItem = Form.Item;
@@ -46,6 +46,7 @@ class AddUser extends React.PureComponent<AddUserProps, AddUserState> {
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   };
 
+  // @ts-ignore: Useless unused variable warning
   private compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
@@ -55,6 +56,7 @@ class AddUser extends React.PureComponent<AddUserProps, AddUserState> {
     }
   };
 
+  // @ts-ignore: Useless unused variable warning
   private validateToNextPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && this.state.confirmDirty) {

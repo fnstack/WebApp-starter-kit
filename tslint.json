@@ -1,31 +1,31 @@
 {
-  "extends": [
-    "tslint:latest",
-    "tslint-react"
-  ],
+  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
-    "indent": [
-      true,
-      "spaces"
-    ],
-    "quotemark": [
-      true,
-      "single",
-      "jsx-double"
-    ],
-    "no-var-requires": false,
-    "ordered-imports": [false],
-    "member-ordering": [false],
-    "object-literal-sort-keys": false,
-    "no-shadowed-variable": false,
+    "prettier": {
+      "severity": "warning"
+    },
+    "quotemark": [true, "single", "jsx-double"],
+    "no-shadowed-variable":false,
+    "ordered-imports": false,
+    "jsx-boolean-value": false,
+    "no-implicit-dependencies": false,
     "no-submodule-imports": false,
-    "no-console": [
-      false
-    ],
-    "jsx-alignment": [
-      false
-    ],
-    "jsx-no-multiline-js": false,
-    "jsx-no-lambda": false
+    "trailing-comma": false,
+    "semicolon":false,
+    "object-literal-sort-keys":false,
+    "interface-name":false,
+    "arrow-parens":false,
+    "member-ordering":false,
+    "max-line-length": [true, 120],
+    "no-console": {
+      "severity": "warning"
+    },
+    "comment-format": {
+      "severity": "warning"
+    },
+    "no-string-literal": {
+      "severity": "warning"
+    }
   }
 }

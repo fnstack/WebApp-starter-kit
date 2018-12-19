@@ -1,11 +1,20 @@
 import * as React from 'react';
-import {Route, IndexRoute} from 'react-router';
+import * as Loadable from 'react-loadable';
+import { Switch, Route } from 'react-router-dom';
+import { Loader } from './shared';
 
-import {Layout, NotFoundPage} from './shell';
+// @ts-ignore No relevant error
+const LoadableApp = Loadable({
+  loader: () => import('./layout/app'),
+  loading: () => <Loader fullScreen spinning />
+});
 
-export default(
-  <Route path="/" component={Layout}>
-    <IndexRoute component={NotFoundPage}/>
-    <Route path="*" component={NotFoundPage}/>
-  </Route>
-);
+const Routes = () => {
+  return (
+    <Switch>
+      <Route path="/" component={LoadableApp} />
+    </Switch>
+  );
+};
+
+export { Routes };

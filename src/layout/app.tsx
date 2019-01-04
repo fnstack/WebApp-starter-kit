@@ -8,22 +8,31 @@ import { MenuTests } from 'menuTests';
 
 // @ts-ignore no relevant error
 import * as logo from '../images/logo.png';
+import { User } from 'oidc-client';
+import { RedirectToAuth, userManager } from 'identity';
 
 const { Sider, Content, Footer } = Layout;
 
 interface AppState {
   collapsed: boolean;
+  user: User;
 }
 
 class App extends React.PureComponent<{}, AppState> {
   public state = {
-    collapsed: false
+    collapsed: false,
+    user: JSON.parse(localStorage.getItem('user')) as User
   };
 
   private toggleSideBar = () => {
     const { collapsed } = this.state;
 
     this.setState({ collapsed: !collapsed });
+  };
+
+  public isAuthenticated = (): boolean => {
+    const { user } = this.state;
+    return user && !user.expired;
   };
 
   public render() {
@@ -56,13 +65,25 @@ class App extends React.PureComponent<{}, AppState> {
               overflow: 'initial'
             }}
           >
-            <Switch>
-              <Route path="/main/child" component={MenuTests} />
+            {this.isAuthenticated() && (
+              <Switch>
+                <Route path="/main/child" component={MenuTests} />
 
-              <Route component={Page404} />
-            </Switch>
+                <Route component={Page404} />
+              </Switch>
+            )}
+            {!this.isAuthenticated() && (
+              <Switch>
+                <Route
+                  render={() => (
+                    // tslint:disable-next-line:jsx-no-lambda
+                    <RedirectToAuth userManager={userManager} />
+                  )}
+                />
+              </Switch>
+            )}
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Webb app starter kit © 2018 FnStack, Inc.</Footer>
+          <Footer style={{ textAlign: 'center' }}>Web Starter kit © 2018 FnStack, Inc.</Footer>
         </Layout>
       </Layout>
     );

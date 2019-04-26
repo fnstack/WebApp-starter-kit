@@ -4,10 +4,10 @@ import { FormComponentProps } from 'antd/lib/form';
 
 const FormItem = Form.Item;
 
-interface AddUserProps extends FormComponentProps {
-  onSubmit: (value: { variables: any }) => void;
+interface AddUserProps {
+  onSubmit: any;
   onCloseModal: () => void;
-  loading: boolean;
+  loading: any;
 }
 
 interface AddUserState {

@@ -70,49 +70,50 @@ class MenuTests extends React.PureComponent<{}, MenuTestListState> {
             );
           }}
         </Query>
-        {this.registerUserModal()}
+        {/* {this.registerUserModal()} */}
       </>
     );
   }
 
-  private registerUserModal = () => {
-    const { showHideAddModal: showAddModal } = this.state;
+  // private registerUserModal = () => {
+  //   const { showHideAddModal: showAddModal } = this.state;
 
-    /* tslint:disable:jsx-no-lambda */
-    return (
-      <Mutation key="registerUser" mutation={registerUser}>
-        {(registerUser, { loading, error }) => {
-          if (error) {
-            this.handleShowHideAddModal();
+  //   /* tslint:disable:jsx-no-lambda */
+  //   return (
+  //     <Mutation key="registerUser" mutation={registerUser}>
+  //       {(registerUser, { loading, error }) => {
+  //         if (error) {
+  //           this.handleShowHideAddModal();
 
-            notification.error({
-              message: 'Error!',
-              description: `L'erreur "${error}", s'est produite pendant l'enregistrement de l'utilisateur`
-            });
-            return null;
-          }
+  //           notification.error({
+  //             message: 'Error!',
+  //             description: `L'erreur "${error}", s'est produite pendant l'enregistrement de l'utilisateur`
+  //           });
+  //           return null;
+  //         }
 
-          return (
-            <Modal
-              visible={showAddModal}
-              title="Ajouter un type de carrier"
-              onCancel={this.handleShowHideAddModal}
-              footer={[
-                <Button key="back" onClick={this.handleShowHideAddModal}>
-                  Annuler
-                </Button>,
-                <Button key="submit" type="primary" htmlType="submit" loading={loading} form="AddUserForm">
-                  Créer
-                </Button>
-              ]}
-            >
-              <AddUserForm onSubmit={registerUser} loading={loading} onCloseModal={this.handleShowHideAddModal} />
-            </Modal>
-          );
-        }}
-      </Mutation>
-    );
-  };
+  //         return (
+  //           <Modal
+  //             visible={showAddModal}
+  //             title="Ajouter un type de carrier"
+  //             onCancel={this.handleShowHideAddModal}
+  //             footer={[
+  //               <Button key="back" onClick={this.handleShowHideAddModal}>
+  //                 Annuler
+  //               </Button>,
+  //               <Button key="submit" type="primary" htmlType="submit" loading={loading} form="AddUserForm">
+  //                 Créer
+  //               </Button>
+  //             ]}
+  //           >
+  //             {/* <AddUserForm onSubmit={registerUser} loading={loading}
+  //           onCloseModal={this.handleShowHideAddModal} /> */}
+  //           </Modal>
+  //         );
+  //       }}
+  //     </Mutation>
+  //   );
+  // };
 }
 
 export { MenuTests };

@@ -4,7 +4,7 @@ import './app.less';
 import { Header, SideMenu, Breadcrumb } from './components';
 import { Route, Switch, Link } from 'react-router-dom';
 import { Page404 } from './page404';
-import { MenuTests } from 'menuTests';
+import { MenuTests } from 'modules/menuTests';
 
 // @ts-ignore no relevant error
 import * as logo from '../images/logo.png';

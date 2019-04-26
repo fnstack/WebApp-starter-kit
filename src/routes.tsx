@@ -5,7 +5,7 @@ import { Loader } from './shared';
 
 // @ts-ignore No relevant error
 const LoadableApp = Loadable({
-  loader: () => import('./layout/app'),
+  loader: () => import('./modules/app/app'),
   loading: () => <Loader fullScreen spinning />
 });
 

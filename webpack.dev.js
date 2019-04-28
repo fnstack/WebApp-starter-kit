@@ -19,11 +19,26 @@ module.exports = merge(common, {
 
   plugins: [
     // Create HTML file that includes reference to bundled JS.
-    new HtmlWebpackPlugin({ template: 'src/index.html', favicon: 'src/favicon.ico' }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      favicon: 'src/favicon.ico',
+      chunks: ['app'],
+      filename: 'index.html'
+    }),
+    // new HtmlWebpackPlugin({
+    //   template: 'src/identity/silentRenew/silent_renew.html',
+    //   chunks: ['silentRenew'],
+    //   filename: 'silent_renew.html'
+    // }),
 
     new ForkTsCheckerWebpackPlugin(),
 
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: "'development'"
+      }
+    })
   ],
 
   module: {
@@ -47,8 +62,7 @@ module.exports = merge(common, {
           {
             loader: 'ts-loader',
             options: {
-              happyPackMode: true,
-              transpileOnly: true
+              happyPackMode: true
             }
           }
         ]
@@ -100,7 +114,7 @@ module.exports = merge(common, {
     ]
   },
   devServer: {
-    contentBase: '/',
+    // contentBase: path.join(__dirname, '/'),
     port,
     hot: true,
     open: true,
@@ -108,13 +122,15 @@ module.exports = merge(common, {
       app.use(function(req, res, next) {
         if (path.extname(req.path).length > 0) {
           next();
-        } else {
+        }
+        // else if (path.dirname(req.path).indexOf('silent_renew') > -1) {
+        //   req.url = '/silent_renew.html';
+        //   next();
+        // }
+        else {
           req.url = '/index.html';
           next();
         }
-      });
-      app.get('/', function(req, res) {
-        res.sendFile(path.join(__dirname, '/src/index.html'));
       });
     }
   }

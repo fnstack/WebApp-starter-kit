@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Layout } from 'antd';
 import './app.less';
+import '../styles/less/themes/index.less';
 import { Header, SideMenu, Breadcrumb } from './components';
 import { Route, Switch, Link } from 'react-router-dom';
 import { Page404 } from './page404';
@@ -49,8 +50,8 @@ class App extends React.PureComponent<{}, AppState> {
           <Breadcrumb />
           <Content
             style={{
-              margin: '24px 16px 0 16px',
-              padding: 24,
+              margin: '12px 16px 0 16px',
+              padding: 16,
               background: '#fff',
               minHeight: 280,
               overflow: 'initial'
@@ -62,7 +63,7 @@ class App extends React.PureComponent<{}, AppState> {
               <Route component={Page404} />
             </Switch>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Webb app starter kit © 2018 FnStack, Inc.</Footer>
+          <Footer style={{ textAlign: 'center', padding: 4 }}>Webb app starter kit © 2019 FnStack, Inc.</Footer>
         </Layout>
       </Layout>
     );

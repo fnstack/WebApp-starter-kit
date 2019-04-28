@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'http://localhost:5000/'
+schema: 'https://api.graphql-europe.org/'
 documents: ./src/graphql/**/*.{ts,tsx}
 generates:
   src/modules/shared/types/schema-types.tsx:

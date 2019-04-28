@@ -3,8 +3,8 @@ const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 
 module.exports = {
   entry: {
-    app: [path.resolve(__dirname, 'src/index.tsx')],
-    silentRenew: [path.resolve(__dirname, 'src/identity/silentRenew/index.ts')]
+    app: [path.resolve(__dirname, 'src/index.tsx')]
+    // silentRenew: [path.resolve(__dirname, 'src/identity/silentRenew/index.ts')]
   },
 
   resolve: {

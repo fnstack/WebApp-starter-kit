@@ -2,7 +2,6 @@ import '@babel/polyfill';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import './modules/styles/sass/app.scss';
-import './modules/styles/less/themes/index.less';
 import { BrowserRouter } from 'react-router-dom';
 import { Routes } from './routes';
 import { ApolloProvider } from 'react-apollo';

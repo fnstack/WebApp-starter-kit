@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Row, Col, Button, Divider, List, Popconfirm, Icon, Skeleton, Avatar } from 'antd';
-import { IconButtonAction } from 'shared';
+import { IconButtonAction } from 'modules/shared';
 
 interface MenuTestListProps {
   className?: string;

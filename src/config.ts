@@ -11,7 +11,7 @@ interface Config {
 
 export const config: Config = {
   api: {
-    uri: 'https://fakerql.com/graphql',
+    uri: 'https://api.graphql-europe.org',
     wsUri: `wss://fakerql.com/graphql`
   },
   identity: {

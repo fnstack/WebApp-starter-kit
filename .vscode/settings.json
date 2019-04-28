@@ -16,6 +16,7 @@
     "persistor",
     "polyfill",
     "reactstrap",
+    "scroller",
     "swal",
     "sweetalert",
     "testenv",

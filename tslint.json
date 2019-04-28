@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier", "tslint-react-hooks"],
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
     "prettier": {
@@ -27,6 +27,7 @@
     },
     "no-string-literal": {
       "severity": "warning"
-    }
+    },
+    "react-hooks-nesting": "error"
   }
 }

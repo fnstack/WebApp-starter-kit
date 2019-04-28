@@ -1,0 +1,11 @@
+overwrite: true
+schema: 'https://api.graphql-europe.org/'
+documents: ./src/graphql/**/*.{ts,tsx}
+generates:
+  src/modules/shared/types/schema-types.tsx:
+    config:
+      noNamespaces: true
+    plugins:
+      - 'typescript-common'
+      - 'typescript-client'
+      - 'typescript-react-apollo'

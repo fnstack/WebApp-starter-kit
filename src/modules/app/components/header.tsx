@@ -68,7 +68,7 @@ class Header extends React.PureComponent<HeaderProps, HeaderState> {
               title={
                 <span>
                   <Icon type="user" />
-                  {user.profile.preferred_username}
+                  {/* {user.profile.preferred_username} */}
                 </span>
               }
             >

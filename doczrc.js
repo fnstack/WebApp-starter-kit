@@ -2,7 +2,7 @@ export default {
   title: 'DGDDI VMS Web Client',
   description: 'Client web pour DGDDI VMS',
 
-  port: 3001,
+  port: 3000,
   wrapper: 'docs/app/wrapper',
   codeSandbox: false,
 

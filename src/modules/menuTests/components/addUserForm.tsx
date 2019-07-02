@@ -73,15 +73,24 @@ class AddUser extends React.PureComponent<AddUserProps, AddUserState> {
           <FormItem label="E-mail">
             {getFieldDecorator('email', {
               rules: [
-                { type: 'email', message: `Cette adresse email, n'est pas valide!` },
-                { required: true, message: 'Veuillez entrer votre adresse email!' }
+                {
+                  type: 'email',
+                  message: `Cette adresse email, n'est pas valide!`
+                },
+                {
+                  required: true,
+                  message: 'Veuillez entrer votre adresse email!'
+                }
               ]
             })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="email" />)}
           </FormItem>
           <FormItem label="Mot de passe">
             {getFieldDecorator('password', {
               rules: [
-                { required: true, message: 'Veillez entrer votre mot de passe!' },
+                {
+                  required: true,
+                  message: 'Veillez entrer votre mot de passe!'
+                },
                 { validator: this.validateToNextPassword }
               ]
             })(
@@ -95,7 +104,10 @@ class AddUser extends React.PureComponent<AddUserProps, AddUserState> {
           <FormItem label="Confirm Password">
             {getFieldDecorator('confirm', {
               rules: [
-                { required: true, message: 'Veuillez confirmez votre mot de passe!' },
+                {
+                  required: true,
+                  message: 'Veuillez confirmez votre mot de passe!'
+                },
                 { validator: this.compareToFirstPassword }
               ]
             })(

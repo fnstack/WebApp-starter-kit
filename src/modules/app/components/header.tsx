@@ -54,7 +54,12 @@ class Header extends React.PureComponent<HeaderProps, HeaderState> {
     return (
       <Layout.Header className={`header ${className}`} style={{ padding: 0, ...style }}>
         <div className="button" onClick={this.handleTogleSidebar}>
-          <Icon type={classnames({ 'menu-unfold': isSideBareCollapsed, 'menu-fold': !isSideBareCollapsed })} />
+          <Icon
+            type={classnames({
+              'menu-unfold': isSideBareCollapsed,
+              'menu-fold': !isSideBareCollapsed
+            })}
+          />
         </div>
 
         <div className="rightWarpper">

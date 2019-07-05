@@ -21,14 +21,13 @@
     "clean:dist": "rimraf ./dist",
     "clean:coverage": "rimraf ./coverage",
     "clean:lib": "rimraf ./node_modules",
-    "prebuild": "npm-run-all clean-dist",
+    "prebuild": "npm-run-all clean:dist",
     "build": "webpack --config webpack.prod.js --mode production",
     "build:run": "npm run build && node tools/distServer.js",
     "test": "cross-env NODE_ENV=test jest",
-    "test-coverage": "cross-env NODE_ENV=test jest --coverage",
-    "test-update": "cross-env NODE_ENV=test jest --updateSnapshot",
-    "test-watch": "npm run test -- --watch",
-    "type-check": "tsc",
+    "test:coverage": "cross-env NODE_ENV=test jest --coverage",
+    "test:update": "cross-env NODE_ENV=test jest --updateSnapshot",
+    "test:watch": "npm run test -- --watch",
     "generate": "gql-gen --config codegen.yml",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "npm run build && rimraf storybook-static && build-storybook",
@@ -144,6 +143,9 @@
     "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^4.2.1",
     "webpack-simple-progress-plugin": "^0.0.4"
+  },
+  "resolutions": {
+    "@types/react": "^16.8.23"
   },
   "lint-staged": {
     "*.ts{,x}": [

@@ -4,7 +4,7 @@ import { FormComponentProps } from 'antd/lib/form';
 
 const FormItem = Form.Item;
 
-interface AddUserProps {
+interface AddUserProps extends FormComponentProps {
   onSubmit: any;
   onCloseModal: () => void;
   loading: any;

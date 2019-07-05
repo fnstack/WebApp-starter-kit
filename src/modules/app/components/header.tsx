@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Icon, Layout, Menu, Button } from 'antd';
+import { Icon, Layout, Menu } from 'antd';
 import classnames from 'classnames';
 import './header.less';
 import { userManager } from 'identity';
@@ -34,21 +34,14 @@ class Header extends React.PureComponent<HeaderProps, HeaderState> {
     toggleSideBar();
   };
 
-  private handleOnLogin = async e => {
-    e.preventDefault();
-    localStorage.removeItem('user');
-    localStorage.removeItem('isAuthenticated');
-    await userManager.signinRedirect();
-  };
-
-  private handleOnLogOut = async e => {
+  private handleOnLogOut = async () => {
     localStorage.removeItem('user');
     localStorage.removeItem('isAuthenticated');
     await userManager.signoutRedirect();
   };
 
   public render() {
-    const { isSideBareCollapsed, isAuthenticated, user } = this.state;
+    const { isSideBareCollapsed } = this.state;
     const { style, className } = this.props;
 
     return (

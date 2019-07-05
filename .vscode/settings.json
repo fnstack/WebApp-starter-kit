@@ -21,5 +21,8 @@
     "sweetalert",
     "testenv",
     "toastr"
+  ],
+  "vsicons.associations.folders": [
+    { "icon": "graphql", "extensions": ["graphqlDefinitions"], "format": "svg" }
   ]
 }

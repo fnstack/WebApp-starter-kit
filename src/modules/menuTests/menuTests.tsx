@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { Query, Mutation } from 'react-apollo';
-import { notification, Modal, Button } from 'antd';
+import { Query } from 'react-apollo';
+import { notification } from 'antd';
 import Helmet from 'react-helmet';
 import { getAllUsers } from './queries';
-import { MenuTestList, AddUserForm } from './components';
-import { registerUser } from './mutations';
+import { MenuTestList } from './components';
 
 interface MenuTestListState {
   showHideAddModal: boolean;

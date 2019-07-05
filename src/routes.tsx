@@ -12,15 +12,15 @@ const LoadableApp = Loadable({
 const Routes = () => {
   return (
     <Switch>
-      <Route
+      {/* <Route
         path="/callback"
         render={routeProps => (
-          /* tslint:disable-next-line:jsx-no-lambda */
+           tslint:disable-next-line:jsx-no-lambda
           <Callback onSuccess={() => routeProps.history.push('/')} userManager={userManager}>
             <Loader fullScreen spinning />
           </Callback>
         )}
-      />
+      /> */}
       <Route path="/" component={LoadableApp} />
     </Switch>
   );
